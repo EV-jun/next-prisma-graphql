@@ -1,33 +1,20 @@
 import { PrismaClient } from "@prisma/client"
+import { links } from "../data/links"
+
 
 const prisma = new PrismaClient();
 
 export const main = async () => {
-    const newFeedBack = await prisma.link.createMany({
-        data: [
-            {
-              title: 'Lovely app',
-              description: 'FEEDBACK',
-              url: 'mahmoud@prisma.io',
-              category: 'Mahmoud',
-              imageUrl: ""
-            },
-            {
-              title: 'Add dark mode',
-              description: 'IDEA',
-              url: 'dan@prisma.io',
-              category: 'Dan',
-              imageUrl: ""
-            },
-            {
-              title: 'layout is broken on mobile',
-              description: 'ISSUE',
-              url: 'alex@prisma.io',
-              category: 'Alex',
-              imageUrl: ""
-            },
-          ],
-    })
+  await prisma.user.create({
+    data: {
+      email: 'test@gmail.com',
+      role: 'ADMIN',
+    },
+  });
+
+  await prisma.link.createMany({
+    data: links,
+  });
 }
 
 // Won't work if the main function is not called lol

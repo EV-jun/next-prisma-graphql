@@ -18,4 +18,20 @@ model Link {
   url String
   category String
   imageUrl String
+  users User[]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String?  @unique
+  image     String?
+  role      Role     @default(USER)
+  bookmarks Link[]
+}
+
+enum Role {
+  USER
+  ADMIN
 }
